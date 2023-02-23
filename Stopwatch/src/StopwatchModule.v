@@ -28,7 +28,7 @@ always @(posedge sys_clk or negedge sys_rst_n) begin
             if (stopWatchCtr_ms == 4'd10) begin
                 stopWatchCtr_ms = 4'b0;
                 stopWatchCtr_sec = stopWatchCtr_sec + 1'b1;
-                led <= {~stopWatchCtr_sec, led[1:0]};
+                led <= {~stopWatchCtr_sec, led[1:0]}; // for debug purposes
             end
             led[1] <= ~led[1]; // for debug purposes
         end
@@ -39,7 +39,7 @@ end
 
 // Segment decoder and mulitplexer. The former converts decimal values into binary pin output so the data is in a way hardware compatible while the latter switches between segement in a timely sequence and apply the correct data.
 // The {<value>,<value>} is the concatenation operator, meaning it joins the left and right side values into a longer data set
-reg [7:0] segmentData; // 8 bits long but note only 7 bits are used in the case statement
+reg [4:0] segmentData; // 4 bits long (decimal value up to 16) but note only decimal value 0 - 9 is used in the case statement, potential bug if not rectified
 reg segmentDot; // 1 bit long
 
 always @ (posedge sys_clk) begin
@@ -65,7 +65,7 @@ always @ (posedge sys_clk) begin
                     end
         4'b1011 : segmentData = (stopWatchCtr_sec / 4'd10) % 4'd6;
         4'b0111 : begin
-                    segmentData = stopWatchCtr_sec / 6'd60;
+                    segmentData = (stopWatchCtr_sec / 6'd60) % 4'd10; // Slight bug here where when the result overflows to 4'd10 then it doesn't get read by the segment decoder, resolved with an additional modulus (%)
                     segmentDot = 1'b1;
                     end
         default : begin 
