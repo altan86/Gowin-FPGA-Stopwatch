@@ -1,0 +1,29 @@
+Reading netlist file: "C:\Users\kistan\Documents\Stopwatch\impl\gwsynthesis\Stopwatch.vg"
+Parsing netlist file "C:\Users\kistan\Documents\Stopwatch\impl\gwsynthesis\Stopwatch.vg" completed
+Processing netlist completed
+Reading constraint file: "C:\Users\kistan\Documents\Stopwatch\src\StopWatchModule.cst"
+Physical Constraint parsed completed
+Running placement......
+[10%] Placement Phase 0 completed
+[20%] Placement Phase 1 completed
+[30%] Placement Phase 2 completed
+[50%] Placement Phase 3 completed
+Running routing......
+[60%] Routing Phase 0 completed
+[70%] Routing Phase 1 completed
+[80%] Routing Phase 2 completed
+[90%] Routing Phase 3 completed
+Running timing analysis......
+[95%] Timing analysis completed
+Placement and routing completed
+Bitstream generation in progress......
+Bitstream generation completed
+Running power analysis......
+[100%] Power analysis completed
+Generate file "C:\Users\kistan\Documents\Stopwatch\impl\pnr\Stopwatch.power.html" completed
+Generate file "C:\Users\kistan\Documents\Stopwatch\impl\pnr\Stopwatch.pin.html" completed
+Generate file "C:\Users\kistan\Documents\Stopwatch\impl\pnr\Stopwatch.rpt.html" completed
+Generate file "C:\Users\kistan\Documents\Stopwatch\impl\pnr\Stopwatch.rpt.txt" completed
+Generate file "C:\Users\kistan\Documents\Stopwatch\impl\pnr\Stopwatch.tr.html" completed
+Thu Feb 23 09:51:59 2023
+
