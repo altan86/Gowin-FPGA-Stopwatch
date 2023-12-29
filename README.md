@@ -34,6 +34,7 @@
  * When an `always` statement includes more than 1 condition, e.g. `always @ (posedge sys_clk or negedge sys_rst_n)`, said `always` block requires at least one `if` statement with either condition to be nested within the block.
  * There are two types of bitwise shift operator, `>>>` and `>>` (`<<<` and `<<` for reverse direction). Triple brackets are arithmetic shift where as double brackets are logical shifts. The `>>>` operator is unique from the other shift operator ( `<<<`, `<<` and `>>`), where by it will fill the left side of a **signed** parameter with a copy of the left most bit value, e.g. `4'b1011 >>> 1; //becomes 4'b1101 after shift`. The other shift operator simply fills the first or last bit with 0, depending on which shift direction.
  * Tang Nano 20k uses a 27 Mhz crystal oscillator, meaning its clock speed is basically 27 million pulses. Hence, a clock pulse counter that resets at 2.7 million pulses is equivalent to 0.1 seconds.
+ * Line "assign sys_rst_n = ~sys_rst;" was added to address the inverted button signal in the TangNano20k.
 
 # Useful links for further study
  * https://www.chipverify.com/verilog/verilog-tutorial (General starting point)
