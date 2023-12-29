@@ -1,49 +1,61 @@
+/* TangNano9k -> TangNano20k notes:
+1) Shift first half LED pin number by +5 for LED 0 and 1, e.g. LED[0] pin 10 -> 15 & LED[1] pin 11 -> 16
+2) Shift second half LED pin number by +4 for LED 2 to 5, e.g. LED[3] pin 13 -> 17 & LED[4] pin 14 -> 18
+3) System clock change from pin 52 to pin 4
+4) Reset button change from 4 to 87
+5) Must use "IO_TYPE=LVCMOS33" to force the port to output/input 3.3v, this will also set BANK_VCCIO to 3.3
+5A) Only inputs can have its BANK_VCCIO set lower than 3.3
+6) Other IO standard are LVCMOS33, LVCMOS25, LVCMOS18, LVCMOS15, and LVCMOS12
+7) DRIVE=8 refers to Drive Strength(mA) or current output, values of 4,8,12,16, and 24. Used for output pins
+8) Button S1 = 88, S2 = 87 
+*/
+
 // Debug LED
-IO_LOC "led[0]" 10;
-IO_PORT "led[0]" PULL_MODE=UP DRIVE=8;
-IO_LOC "led[1]" 11;
-IO_PORT "led[1]" PULL_MODE=UP DRIVE=8;
-IO_LOC "led[2]" 13;
-IO_PORT "led[2]" PULL_MODE=UP DRIVE=8;
-IO_LOC "led[3]" 14;
-IO_PORT "led[3]" PULL_MODE=UP DRIVE=8;
-IO_LOC "led[4]" 15;
-IO_PORT "led[4]" PULL_MODE=UP DRIVE=8;
-IO_LOC "led[5]" 16;
-IO_PORT "led[5]" PULL_MODE=UP DRIVE=8;
+IO_LOC "led[0]" 15;
+IO_PORT "led[0]" PULL_MODE=UP DRIVE=4;
+IO_LOC "led[1]" 16;
+IO_PORT "led[1]" PULL_MODE=UP DRIVE=4;
+IO_LOC "led[2]" 17;
+IO_PORT "led[2]" PULL_MODE=UP DRIVE=4;
+IO_LOC "led[3]" 18;
+IO_PORT "led[3]" PULL_MODE=UP DRIVE=4;
+IO_LOC "led[4]" 19;
+IO_PORT "led[4]" PULL_MODE=UP DRIVE=4;
+IO_LOC "led[5]" 20;
+IO_PORT "led[5]" PULL_MODE=UP DRIVE=4;
 
 // Segment display
-IO_LOC "segLED[0]" 70;
-IO_PORT "segLED[0]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[1]" 71;
-IO_PORT "segLED[1]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[2]" 72;
-IO_PORT "segLED[2]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[3]" 73;
-IO_PORT "segLED[3]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[4]" 74;
-IO_PORT "segLED[4]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[5]" 75;
-IO_PORT "segLED[5]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[6]" 76;
-IO_PORT "segLED[6]" PULL_MODE=UP DRIVE=8;
-IO_LOC "segLED[7]" 77;
-IO_PORT "segLED[7]" PULL_MODE=UP DRIVE=8;
+IO_LOC "segLED[0]" 77;
+IO_PORT "segLED[0]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[1]" 27;
+IO_PORT "segLED[1]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[2]" 28;
+IO_PORT "segLED[2]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[3]" 25;
+IO_PORT "segLED[3]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[4]" 26;
+IO_PORT "segLED[4]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[5]" 29;
+IO_PORT "segLED[5]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[6]" 30;
+IO_PORT "segLED[6]" PULL_MODE=UP DRIVE=12;
+IO_LOC "segLED[7]" 31;
+IO_PORT "segLED[7]" PULL_MODE=UP DRIVE=12;
 
-IO_LOC "segBlock[0]" 80;
-IO_PORT "segBlock[0]" PULL_MODE=DOWN DRIVE=8;
-IO_LOC "segBlock[1]" 81;
-IO_PORT "segBlock[1]" PULL_MODE=DOWN DRIVE=8;
-IO_LOC "segBlock[2]" 82;
-IO_PORT "segBlock[2]" PULL_MODE=DOWN DRIVE=8;
-IO_LOC "segBlock[3]" 83;
-IO_PORT "segBlock[3]" PULL_MODE=DOWN DRIVE=8;
+IO_LOC "segBlock[0]" 41;
+IO_PORT "segBlock[0]" PULL_MODE=DOWN DRIVE=12;
+IO_LOC "segBlock[1]" 42;
+IO_PORT "segBlock[1]" PULL_MODE=DOWN DRIVE=12;
+IO_LOC "segBlock[2]" 80;
+IO_PORT "segBlock[2]" PULL_MODE=DOWN DRIVE=12;
+IO_LOC "segBlock[3]" 76;
+IO_PORT "segBlock[3]" PULL_MODE=DOWN DRIVE=12;
 
 // Buttons
-IO_LOC "sys_rst_n" 4;
-IO_PORT "sys_rst_n" PULL_MODE=UP;
-IO_LOC "sys_startstopbtn" 3;
+IO_LOC "sys_rst" 87;
+IO_PORT "sys_rst" PULL_MODE=UP;
+IO_LOC "sys_startstopbtn" 88;
 IO_PORT "sys_startstopbtn" PULL_MODE=UP;
-IO_LOC "sys_clk" 52;
+IO_LOC "sys_clk" 4;
 IO_PORT "sys_clk" IO_TYPE=LVCMOS33;
 IO_PORT "sys_clk" PULL_MODE=UP;

@@ -1,10 +1,10 @@
 module stopwatch (
     input sys_clk,          // clock input with frequency of 27 Mhz
-    input sys_rst_n,        // reset button
+    input sys_rst,        // reset button
     input sys_startstopbtn, // start stop button
-    output reg [5:0] led = 6'b111111, // LEDS pin 10, 11, 13, 14, 15, 16
-    output reg [7:0] segLED = 8'b1111_1111, // pins 70 thru 77
-    output reg [3:0] segBlock = 4'b1110 // pins 80 thru 83, note the pull direction in constraints file
+    output reg [5:0] led = 6'b111111, // LEDS pin 15, 16, 17, 18, 19, 20
+    output reg [7:0] segLED = 8'b1111_1111, // pins 77, 27, 28, 25, 26, 29, 30, and 31
+    output reg [3:0] segBlock = 4'b1110 // pins 41, 42, 80, and 76, note the pull direction in constraints file
 
 );
 
@@ -14,10 +14,12 @@ reg [31:0] timeScale = 32'd2_700_000; //0.1 seconds or 10 Hz base timer,
 reg [3:0] stopWatchCtr_ms = 4'b0;
 reg [31:0] stopWatchCtr_sec = 32'b0;
 
-always @(posedge sys_clk or negedge sys_rst_n) begin
-    if (!sys_rst_n) begin // Reset everything
+assign sys_rst_n = ~sys_rst; // added to invert the signal profile to match that of the TangNano9K
+
+always @(posedge sys_clk or negedge sys_rst_n) begin 
+    if (!sys_rst_n) begin // Reset everything // changed !sys_rst_n to sys_rst_n due to inverted signal profile from TangNano9K
         timer = 32'd0;
-        led[6:1] = 5'b11111; // this means assign the value 5'b11111 to the 6th thru 1st bit in the LED parameter in, e.g. LED is 6'b000000 -> assign 5'b11111 to LED[6:1] -> LED is 6'111110
+        led[5:1] = 5'b11111; // this means assign the value 5'b11111 to the 6th thru 1st bit in the LED parameter in, e.g. LED is 6'b000000 -> assign 5'b11111 to LED[6:1] -> LED is 6'111110
         stopWatchCtr_ms = 4'b0;
         stopWatchCtr_sec = 32'b0;
     end else if (startStopClk) begin // The Stopwatch clock engine
@@ -90,14 +92,15 @@ always @(posedge sys_clk) begin
 end
 
 // Start Stop button, Rise edge detection, non continuous single button press
-// Rational: fill a counter up by copying and kinf of bitshifting so that a 2 bit comparator (array pos 2 and 1) gives a true value in one pulse cycle
+// Rational: fill a counter by copying and bitshifting so that a 2 bit comparator (array pos 2 and 1) gives a true value in one pulse cycle
+// It is a method to detect posedge or negedge with a n clock cycle delay
 // { , } = concantenate two parameter, see above
 reg [2:0] btn_ctr = 4'b111;
 reg inc_ctr;
 reg startStopClk;
 
 always @ (posedge sys_clk) begin
-    btn_ctr <= {btn_ctr[1:0],sys_startstopbtn};
+    btn_ctr <= (btn_ctr << 1) | sys_startstopbtn; // alternative {btn_ctr[1:0],sys_startstopbtn};
     inc_ctr <= ~btn_ctr[2] & btn_ctr[1];
     if (inc_ctr) begin
         startStopClk <= ~startStopClk;

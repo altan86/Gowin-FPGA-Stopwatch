@@ -1,8 +1,9 @@
--d C:\Users\kistan\Documents\Stopwatch\impl\gwsynthesis\Stopwatch.vg
--p GW1NR-9C-QFN88P-6
--pn GW1NR-LV9QN88PC6/I5
--cst C:\Users\kistan\Documents\Stopwatch\src\StopWatchModule.cst
--cfg C:\Users\kistan\Documents\Stopwatch\impl\pnr\device.cfg
+-d C:\Users\kistan\Documents\GitHub\Gowin-FPGA-Stopwatch\Stopwatch\impl\gwsynthesis\Stopwatch.vg
+-p GW2AR-18C-QFN88P-8
+-pn GW2AR-LV18QN88PC8/I7
+-cst C:\Users\kistan\Documents\GitHub\Gowin-FPGA-Stopwatch\Stopwatch\src\StopWatchModule.cst
+-cfg C:\Users\kistan\Documents\GitHub\Gowin-FPGA-Stopwatch\Stopwatch\impl\pnr\device.cfg
+-sdc C:\Users\kistan\Documents\GitHub\Gowin-FPGA-Stopwatch\Stopwatch\src\Stopwatch.sdc
 -bit
 -tr
 -ph
