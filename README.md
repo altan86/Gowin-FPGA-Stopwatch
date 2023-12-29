@@ -1,5 +1,7 @@
-# Gowin FPGA Stopwatch
+# Gowin FPGA Stopwatch (TangNano9K version)
  Verilog codes for a stopwatch project using the Tang Nano 9k. LED clock display used is the **Common Cathode** pinout.
+ 
+ * NOTICE: For the TangNano20K version please change to "TangNano20K" branch
  
 # Pin connection (Please refer to 7 Segment LED clock display datasheet)
  Tang Nano 9k Pin&emsp;&emsp;&emsp;&emsp;7 Segment LED pin&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Notes
